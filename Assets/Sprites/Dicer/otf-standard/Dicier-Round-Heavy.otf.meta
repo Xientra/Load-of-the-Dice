@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: ada8f2f4203455b418c80db5f6874e67
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Dicier
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bcaa64659b27d034cbb130c9cf88d885, type: 3}
+  - {fileID: 12800000, guid: 9b0603ff41589cf428bf1546ea91f43c, type: 3}
+  - {fileID: 12800000, guid: 0472486597cbead4f9a7d3342e0bffc4, type: 3}
+  - {fileID: 12800000, guid: 504d4c4dc70a48e4d944d3441ef1447b, type: 3}
+  - {fileID: 12800000, guid: a3b900c02df53874ba559e76b4c55c39, type: 3}
+  - {fileID: 12800000, guid: bc88ecf0a4ff8314bbbade5c46889ff2, type: 3}
+  - {fileID: 12800000, guid: 24685cab25e8c074294feef088fe1c00, type: 3}
+  - {fileID: 12800000, guid: 4b544b7b132d1cd4d8f1d39b885d5341, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
