@@ -1,0 +1,109 @@
+
+
+ROLL OF THE DICE
+
+RNG
+
+TABLE TOP STUFF / RPG STUFF
+
+---
+
+
+man will konstant das RNG des spiels verändern / manipulieren
+
+
+Assets:
+	Gegner
+		Melee Enemy
+		Ranged Enemy
+		Boss
+	Waffen
+		small
+		medium
+		bulky
+		looks like a assult rifle
+	Player
+		player
+		animations
+	Dice
+		icons
+		(3D model + throw animation)
+	Rooms
+		floor
+		wall
+		door
+
+
+Programming:
+
+	Gegner
+		dificulty increase
+
+	Player Movement
+
+	shooting, dice, 
+		projectiles
+
+	guns, properties
+		gun genration?
+
+	level progression / game manager
+
+---
+
+man kann den würfel zerstören und sich dann eine nummer aussuchen
+
+kugeln bouncen von wänden (piercen) vierlieren dabei hälfte des wertes
+
+---
+
+"get rolled"
+"im on a roll"
+"high roller"
+
+
+
+NOT rng, tactical dice throwing
+im spiel selber ist nichts random
+
+
+"roll of the dice" == etwas machen was riskant ist
+	high rist high reward
+
+
+2D top down shooter mit super random sachen. Kugeln fliegen in random richtungen, man schießt random kugeln
+	sämtlich rng in einem spiel ist verbunden. indem man ein rng wurf triggered ändert man das andere
+	
+	man muss waffen mit würfeln laden
+		mehrere würfel in 1 kugel (dauert länger aber mehr schaden)
+
+
+man spielt einen würfel und rolled durch die welt
+
+unendlichseitiger würfel
+	ganz viele verschiedene würfel
+
+
+gatcha GAME!!!! / glücksspiel / MMO
+	man bekommt würfel aus dem gatcha
+
+
+
+descision based game, 
+
+fighting game wo alles rng ist
+
+
+detektive game wo der mörder per würfel entschieden wird
+
+
+
+yonas or paul likes these games
+	a link to the past
+	great ace attourney
+	battle royal
+	2D souls like
+	bartender game
+	bullet hell
+	gatcha game
+
