@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: RF Catacombs Floor Rule Tile
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 8012884576142998153, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 8012884576142998153, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: -3014603280532583585, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: -8694136627831920856, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: -2650976800089053616, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: 6453961743177063092, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: 3099943837006309213, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: -9147236951371563752, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    - {fileID: -8661709960715610446, guid: 090cf4098cb5170419ebf748759fd538, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.4
+    m_Output: 1
+    m_ColliderType: 2
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions: []
+    m_RuleTransform: 0
