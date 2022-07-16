@@ -13,10 +13,7 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        if (dice == null)
-        {
-            dice = new Dice(4);
-        }
+
     }
 
     private void Update()
@@ -36,11 +33,12 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
     public void SetDice(Dice dice)
     {
         this.dice = dice;
+        Debug.Log(this.dice);
     }
 
     public Dice GetDice()
     {
-        return dice;
+        return this.dice;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -48,7 +46,8 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
         if (active)
         {
             PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            player.AddDiceToMag(dice, this);
+            Gun gun = player.GetEquippedGun();
+            gun.AddDiceToMag(this.dice);
             active = false;
             transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
         }
