@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-	Camera mainCam;
+	CameraMovement cam;
 
 	private Enemy[] roomEnemies;
 
@@ -22,8 +22,11 @@ public class Room : MonoBehaviour
 
 	[Space(5)]
 
-	public NextRoomTrigger triggerLeft;
-	public NextRoomTrigger triggerRight;
+	public GameObject leftPos;
+	public GameObject rightPos;
+
+	private NextRoomTrigger triggerLeft;
+	private NextRoomTrigger triggerRight;
 
 	[Space(5)]
 
@@ -44,13 +47,16 @@ public class Room : MonoBehaviour
 	{
 		roomEnemies = GetComponentsInChildren<Enemy>();
 
-		triggerLeft.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomLeft.PlayerEnteredRoom(); };
-		triggerRight.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomRight.PlayerEnteredRoom(); };
+		triggerLeft = leftPos.GetComponentInChildren<NextRoomTrigger>();
+		triggerRight = rightPos.GetComponentInChildren<NextRoomTrigger>();
+
+		triggerLeft.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomLeft.PlayerEnteredRoom(args.gameObject); };
+		triggerRight.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomRight.PlayerEnteredRoom(args.gameObject); };
 	}
 
 	private void Start()
 	{
-		mainCam = Camera.main;
+		cam = Camera.main.GetComponent<CameraMovement>();
 	}
 
 	private void Update()
@@ -61,8 +67,8 @@ public class Room : MonoBehaviour
 		{
 			if (isClear)
 			{
-				triggerLeft.gameObject.SetActive(roomLeft != null);
-				triggerRight.gameObject.SetActive(roomRight != null);
+				leftPos.SetActive(roomLeft != null);
+				rightPos.SetActive(roomRight != null);
 
 				// leave collider on if there is no room on that side
 				colliderLeft.enabled = roomLeft == null;
@@ -70,8 +76,8 @@ public class Room : MonoBehaviour
 			}
 			else
 			{
-				triggerLeft.gameObject.SetActive(false);
-				triggerRight.gameObject.SetActive(false);
+				leftPos.SetActive(false);
+				rightPos.SetActive(false);
 
 				colliderLeft.enabled = true;
 				colliderRight.enabled = true;
@@ -79,8 +85,8 @@ public class Room : MonoBehaviour
 		}
 		else
 		{
-			triggerLeft.gameObject.SetActive(false);
-			triggerRight.gameObject.SetActive(false);
+			leftPos.SetActive(false);
+			rightPos.SetActive(false);
 			colliderLeft.enabled = false;
 			colliderRight.enabled = false;
 		}
@@ -100,10 +106,15 @@ public class Room : MonoBehaviour
 
 	}
 
-	public void PlayerEnteredRoom()
+	public void PlayerEnteredRoom(GameObject player)
 	{
 		playerInRoom = true;
-		mainCam.transform.position = new Vector3(transform.position.x, transform.position.y, mainCam.transform.position.z);
+		cam.MoveToPosition(new Vector3(transform.position.x, transform.position.y, cam.transform.position.z));
+
+		if ((player.transform.position - leftPos.transform.position).sqrMagnitude < (player.transform.position - rightPos.transform.position).sqrMagnitude)
+			player.transform.position = leftPos.transform.position;
+		else
+			player.transform.position = rightPos.transform.position;
 
 		// set enemies active
 	}
