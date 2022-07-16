@@ -14,6 +14,7 @@ public class ArrowAnim : MonoBehaviour
 
 	private void Update()
 	{
-		transform.localPosition = originalPos + direction * ((Mathf.Sin(Time.time * speed) + 1) / 2);
+	float moveValue = ((Mathf.Sin(Time.time * speed) + 1) / 2);
+		transform.localPosition = originalPos + direction.x * moveValue * transform.right + direction.y * moveValue * transform.up;
 	}
 }

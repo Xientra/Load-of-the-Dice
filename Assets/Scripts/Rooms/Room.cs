@@ -108,14 +108,19 @@ public class Room : MonoBehaviour
 
 	public void PlayerEnteredRoom(GameObject player)
 	{
-		playerInRoom = true;
+		// move cam
 		cam.MoveToPosition(new Vector3(transform.position.x, transform.position.y, cam.transform.position.z));
 
+		// move player
 		if ((player.transform.position - leftPos.transform.position).sqrMagnitude < (player.transform.position - rightPos.transform.position).sqrMagnitude)
 			player.transform.position = leftPos.transform.position;
 		else
 			player.transform.position = rightPos.transform.position;
 
+		playerInRoom = true;
+
 		// set enemies active
+		foreach (Enemy enemy in roomEnemies)
+			enemy.gameObject.SetActive(true);
 	}
 }

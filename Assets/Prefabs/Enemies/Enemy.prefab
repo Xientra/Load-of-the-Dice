@@ -323,7 +323,7 @@ MonoBehaviour:
   allNumbers: 
   DEBUG_numbersString: 
   currentSpeed: 0
-  speedMinMax: {x: 0.5, y: 50}
+  speedMinMax: {x: 0.5, y: 100}
   currentMoveDirection: {x: 0, y: 0, z: 0}
   changeDirectionsIntervallMinMax: {x: 2, y: 4}
   shootIntervallMinMax: {x: 2, y: 5}
