@@ -71,6 +71,96 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""18e6028b-9de9-45b1-8328-917307fcd595"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""be37be21-028c-4618-906f-9d7c317c2400"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceThree"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ad17479-a964-44f6-aa60-de55b51580bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceFour"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b973ac5-8778-451c-8f1d-e5cda78679d1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceFive"",
+                    ""type"": ""Button"",
+                    ""id"": ""345ddd01-a872-4c22-bec8-249f17dfd601"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceSix"",
+                    ""type"": ""Button"",
+                    ""id"": ""99eb47f4-1c10-4292-88e2-8e926acb0d7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceSeven"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2bacdae-7375-49a3-9374-7b15ddcf66da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceEight"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c6749a8-46c1-4834-b57b-0b46175120e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceNine"",
+                    ""type"": ""Button"",
+                    ""id"": ""1461f5cc-03fd-4960-8d6c-b05d1fbed957"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DiceTen"",
+                    ""type"": ""Button"",
+                    ""id"": ""88e3d817-dad0-46d7-a549-b8435fb35cc6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -313,6 +403,116 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0a6ce24-2d57-4f3e-be78-1353060d84e8"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d32ab5cd-1d5f-4955-b5a3-8d130d8ffd24"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4352f44e-70d5-4ed1-aa3e-661841736aef"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceThree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f126cc7-b9c8-4971-9318-06484a47234c"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceFour"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c589970-2c7a-415a-9398-4d9cde5ede8a"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceFive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90409c5b-6976-4ebb-9ac1-e0cd7a664b24"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceSix"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee156b15-c5fc-49e2-bdda-054f6b21b864"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceSeven"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72ae47b7-ecc8-4517-8f08-3a1a1065ddf3"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceEight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""898959bb-121c-4ab1-96b5-4ec9db3ac110"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceNine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53620de1-5a39-4356-b700-124cad7e0fb5"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DiceTen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -905,6 +1105,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
+        m_Player_DiceOne = m_Player.FindAction("DiceOne", throwIfNotFound: true);
+        m_Player_DiceTwo = m_Player.FindAction("DiceTwo", throwIfNotFound: true);
+        m_Player_DiceThree = m_Player.FindAction("DiceThree", throwIfNotFound: true);
+        m_Player_DiceFour = m_Player.FindAction("DiceFour", throwIfNotFound: true);
+        m_Player_DiceFive = m_Player.FindAction("DiceFive", throwIfNotFound: true);
+        m_Player_DiceSix = m_Player.FindAction("DiceSix", throwIfNotFound: true);
+        m_Player_DiceSeven = m_Player.FindAction("DiceSeven", throwIfNotFound: true);
+        m_Player_DiceEight = m_Player.FindAction("DiceEight", throwIfNotFound: true);
+        m_Player_DiceNine = m_Player.FindAction("DiceNine", throwIfNotFound: true);
+        m_Player_DiceTen = m_Player.FindAction("DiceTen", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -981,6 +1191,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Reload;
+    private readonly InputAction m_Player_DiceOne;
+    private readonly InputAction m_Player_DiceTwo;
+    private readonly InputAction m_Player_DiceThree;
+    private readonly InputAction m_Player_DiceFour;
+    private readonly InputAction m_Player_DiceFive;
+    private readonly InputAction m_Player_DiceSix;
+    private readonly InputAction m_Player_DiceSeven;
+    private readonly InputAction m_Player_DiceEight;
+    private readonly InputAction m_Player_DiceNine;
+    private readonly InputAction m_Player_DiceTen;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -990,6 +1210,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
+        public InputAction @DiceOne => m_Wrapper.m_Player_DiceOne;
+        public InputAction @DiceTwo => m_Wrapper.m_Player_DiceTwo;
+        public InputAction @DiceThree => m_Wrapper.m_Player_DiceThree;
+        public InputAction @DiceFour => m_Wrapper.m_Player_DiceFour;
+        public InputAction @DiceFive => m_Wrapper.m_Player_DiceFive;
+        public InputAction @DiceSix => m_Wrapper.m_Player_DiceSix;
+        public InputAction @DiceSeven => m_Wrapper.m_Player_DiceSeven;
+        public InputAction @DiceEight => m_Wrapper.m_Player_DiceEight;
+        public InputAction @DiceNine => m_Wrapper.m_Player_DiceNine;
+        public InputAction @DiceTen => m_Wrapper.m_Player_DiceTen;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1014,6 +1244,36 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @DiceOne.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceOne;
+                @DiceOne.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceOne;
+                @DiceOne.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceOne;
+                @DiceTwo.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceTwo;
+                @DiceTwo.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceTwo;
+                @DiceTwo.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceTwo;
+                @DiceThree.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceThree;
+                @DiceThree.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceThree;
+                @DiceThree.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceThree;
+                @DiceFour.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceFour;
+                @DiceFour.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceFour;
+                @DiceFour.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceFour;
+                @DiceFive.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceFive;
+                @DiceFive.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceFive;
+                @DiceFive.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceFive;
+                @DiceSix.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceSix;
+                @DiceSix.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceSix;
+                @DiceSix.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceSix;
+                @DiceSeven.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceSeven;
+                @DiceSeven.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceSeven;
+                @DiceSeven.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceSeven;
+                @DiceEight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceEight;
+                @DiceEight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceEight;
+                @DiceEight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceEight;
+                @DiceNine.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceNine;
+                @DiceNine.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceNine;
+                @DiceNine.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceNine;
+                @DiceTen.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceTen;
+                @DiceTen.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceTen;
+                @DiceTen.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDiceTen;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1033,6 +1293,36 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @DiceOne.started += instance.OnDiceOne;
+                @DiceOne.performed += instance.OnDiceOne;
+                @DiceOne.canceled += instance.OnDiceOne;
+                @DiceTwo.started += instance.OnDiceTwo;
+                @DiceTwo.performed += instance.OnDiceTwo;
+                @DiceTwo.canceled += instance.OnDiceTwo;
+                @DiceThree.started += instance.OnDiceThree;
+                @DiceThree.performed += instance.OnDiceThree;
+                @DiceThree.canceled += instance.OnDiceThree;
+                @DiceFour.started += instance.OnDiceFour;
+                @DiceFour.performed += instance.OnDiceFour;
+                @DiceFour.canceled += instance.OnDiceFour;
+                @DiceFive.started += instance.OnDiceFive;
+                @DiceFive.performed += instance.OnDiceFive;
+                @DiceFive.canceled += instance.OnDiceFive;
+                @DiceSix.started += instance.OnDiceSix;
+                @DiceSix.performed += instance.OnDiceSix;
+                @DiceSix.canceled += instance.OnDiceSix;
+                @DiceSeven.started += instance.OnDiceSeven;
+                @DiceSeven.performed += instance.OnDiceSeven;
+                @DiceSeven.canceled += instance.OnDiceSeven;
+                @DiceEight.started += instance.OnDiceEight;
+                @DiceEight.performed += instance.OnDiceEight;
+                @DiceEight.canceled += instance.OnDiceEight;
+                @DiceNine.started += instance.OnDiceNine;
+                @DiceNine.performed += instance.OnDiceNine;
+                @DiceNine.canceled += instance.OnDiceNine;
+                @DiceTen.started += instance.OnDiceTen;
+                @DiceTen.performed += instance.OnDiceTen;
+                @DiceTen.canceled += instance.OnDiceTen;
             }
         }
     }
@@ -1194,6 +1484,16 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnDiceOne(InputAction.CallbackContext context);
+        void OnDiceTwo(InputAction.CallbackContext context);
+        void OnDiceThree(InputAction.CallbackContext context);
+        void OnDiceFour(InputAction.CallbackContext context);
+        void OnDiceFive(InputAction.CallbackContext context);
+        void OnDiceSix(InputAction.CallbackContext context);
+        void OnDiceSeven(InputAction.CallbackContext context);
+        void OnDiceEight(InputAction.CallbackContext context);
+        void OnDiceNine(InputAction.CallbackContext context);
+        void OnDiceTen(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

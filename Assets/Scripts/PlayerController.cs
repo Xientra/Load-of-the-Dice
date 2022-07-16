@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private List<Dice> dices = new List<Dice>();
     private List<Dice> selectedDice = new List<Dice>();
     private List<int> damageRolls = new List<int>();
+    private List<DiceDataStorage> uiButtons = new List<DiceDataStorage>();
 
 
     private void Awake()
@@ -30,8 +32,26 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.Move.ReadValue<Vector2>();
         playerControls.Player.Fire.performed += _ => OnFire();
         playerControls.Player.Reload.performed += _ => OnReload();
+        playerControls.Player.DiceOne.performed += _ => Button(1);
+        playerControls.Player.DiceTwo.performed += _ => Button(2);
+        playerControls.Player.DiceThree.performed += _ => Button(3);
+        playerControls.Player.DiceFour.performed += _ => Button(4);
+        playerControls.Player.DiceFive.performed += _ => Button(5);
+        playerControls.Player.DiceSix.performed += _ => Button(6);
+        playerControls.Player.DiceSeven.performed += _ => Button(7);
+        playerControls.Player.DiceEight.performed += _ => Button(8);
+        playerControls.Player.DiceNine.performed += _ => Button(9);
+        playerControls.Player.DiceTen.performed += _ => Button(10);
         rb = GetComponent<Rigidbody2D>();
         currentEquippedGun = currentGun.transform.GetChild(0).GetComponent<Gun>();
+    }
+
+    private void Button(int v)
+    {
+        if (uiButtons.Count >= v)
+        {
+            uiButtons[v - 1].OnPointerClick(null);
+        }
     }
 
     private void OnEnable()
@@ -102,6 +122,7 @@ public class PlayerController : MonoBehaviour
         GameObject UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
         DiceDataStorage UIDice = Instantiate(diceButton, UIContainer.transform).GetComponent<DiceDataStorage>();
         UIDice.SetDice(dice);
+        uiButtons.Add(UIDice);
     }
 
     public Gun GetEquippedGun()
