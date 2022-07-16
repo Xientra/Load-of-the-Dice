@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
 		for (int i = 0; i <= Mathf.Max(normalNumCount - difficulty, 1); i++)
 		{
 			int effect = Random.Range(0, i == 0 ? 2 : 3); // ensure 0 or 1 once
-			Debug.Log("effect: " + effect);
+			//Debug.Log("effect: " + effect);
 			switch (effect)
 			{
 				// add random numbers (add LESS if difficulty is HIGHER)
