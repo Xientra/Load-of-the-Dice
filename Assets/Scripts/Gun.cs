@@ -17,6 +17,7 @@ public class Gun : MonoBehaviour
     private List<int> damageRolls = new List<int>();
 
     private bool isEquipped = false;
+    private int addCounter = 0;
 
     void Start()
     {
@@ -30,9 +31,13 @@ public class Gun : MonoBehaviour
 
     public void AddDiceToMag(Dice dice)
     {
+        GameObject UIContainer = GameObject.FindGameObjectWithTag("MagUIContainer");
+
         if (selectedDice.Count < maxMagazine && !selectedDice.Contains(dice) && !loaded)
         {
             selectedDice.Add(dice);
+            UIContainer.transform.GetChild(addCounter).GetChild(0).GetComponent<TMP_Text>().SetText("D" + dice.GetValue());
+            addCounter++;
         }
     }
 
@@ -94,6 +99,7 @@ public class Gun : MonoBehaviour
             {
                 loaded = true;
             }
+            addCounter = 0;
         }
         
         //rollReady = false;

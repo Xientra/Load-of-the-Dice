@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public GameObject diceButton;
     public GameObject currentGun;
+    public GameObject sprite;
     private Gun currentEquippedGun;
     private Vector2 relativeMousePos;
     [SerializeField] float moveSpeed = 5;
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         rb.velocity = playerControls.Player.Move.ReadValue<Vector2>() * moveSpeed;
+        sprite.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
     }
 
     public void OnFire()

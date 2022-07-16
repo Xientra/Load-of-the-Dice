@@ -82,6 +82,7 @@ MonoBehaviour:
   bullet: {fileID: 2816037797772750591, guid: 7700b8a2f427f354890bc56147deb968, type: 3}
   diceButton: {fileID: 8654122187902011902, guid: 117e589e9e8be5b48b1fd841683224ee, type: 3}
   currentGun: {fileID: 2131471342}
+  sprite: {fileID: 3362581114736931549}
   moveSpeed: 5
 --- !u!50 &-4868465447981763989
 Rigidbody2D:
@@ -201,6 +202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55a85ffe81fc104186f46dccbc81f4d, type: 3}
+--- !u!1 &3362581114736931549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4711966915103550979, guid: a55a85ffe81fc104186f46dccbc81f4d, type: 3}
+  m_PrefabInstance: {fileID: 8056391373155671262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3362581114736931546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4711966915103550980, guid: a55a85ffe81fc104186f46dccbc81f4d, type: 3}
