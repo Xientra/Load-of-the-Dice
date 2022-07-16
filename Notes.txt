@@ -73,6 +73,19 @@ man kann den würfel zerstören und sich dann eine nummer aussuchen
 
 kugeln bouncen von wänden (piercen) vierlieren dabei hälfte des wertes
 
+	man bekommt single shooter + 1 dice
+	2 waffen, 3 würfen jeden 3. raum einer ebene
+
+chamber
+	wallbounce wert x2 /2
+	pierce (value +1 -1)
+	rebound/bounce 
+	3 shot (left, right, center)
+	3 shot burst (+1 every time)
+	
+
+RETAILIATION
+
 ---
 
 "get rolled"

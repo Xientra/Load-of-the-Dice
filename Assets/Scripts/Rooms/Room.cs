@@ -134,6 +134,7 @@ public class Room : MonoBehaviour
 
 		// set enemies active
 		foreach (Enemy enemy in roomEnemies)
-			enemy.gameObject.SetActive(true);
+			if (enemy != null)
+				enemy.gameObject.SetActive(true);
 	}
 }
