@@ -14,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Enemy Bullet
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effects
+    uniqueID: 204561091
     locked: 0

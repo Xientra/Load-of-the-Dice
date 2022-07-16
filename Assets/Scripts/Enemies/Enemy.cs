@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
 
 	private GameObject player;
 
+	private Rigidbody2D rb;
+
 	public TMP_Text text;
 
 	[Space(5)]
@@ -34,6 +36,18 @@ public class Enemy : MonoBehaviour
 
 	public string DEBUG_numbersString;
 
+	[Header("Movement:")]
+
+	public float currentSpeed = 0f;
+	public Vector2 speedMinMax = new Vector2(5f, 8f);
+
+	public Vector3 currentMoveDirection = Vector3.zero;
+	public Vector2 changeDirectionsIntervallMinMax = new Vector2(2f, 4f);
+	private float changeDirectionTimestamp = 0;
+
+	public Vector2 shootIntervallMinMax = new Vector2(1f, 4f);
+	private float shootTimestamp = 0;
+
 	private void OnValidate()
 	{
 		allNumbers = life.GetAllNumbers();
@@ -42,20 +56,11 @@ public class Enemy : MonoBehaviour
 
 	private void Start()
 	{
-		player = GameObject.FindGameObjectWithTag("Player").gameObject;
+		rb = GetComponent<Rigidbody2D>();
+		player = GameObject.FindGameObjectWithTag("Player");
 		Spawn();
-	}
 
-	// Update is called once per frame
-	private void Update()
-	{
-		crosshair.transform.right = player.transform.position - transform.position;
-
-		text.text = GetNumbersString();
-		DEBUG_numbersString = GetNumbersString();
-
-		float xDir = Mathf.Sign(player.transform.position.x - transform.position.x);
-		graphics.transform.localScale = new Vector3(xDir, graphics.transform.localScale.y, graphics.transform.localScale.z);
+		shootTimestamp = Time.time + Random.Range(shootIntervallMinMax.x, shootIntervallMinMax.y);
 	}
 
 	public void Spawn()
@@ -96,6 +101,9 @@ public class Enemy : MonoBehaviour
 		}
 
 		allNumbers = life.GetAllNumbers();
+
+		text.text = GetNumbersString();
+		DEBUG_numbersString = GetNumbersString();
 	}
 
 	private string GetNumbersString()
@@ -124,6 +132,42 @@ public class Enemy : MonoBehaviour
 		return result;
 	}
 
+	// Update is called once per frame
+	private void Update()
+	{
+		MoveAndShoot();
+
+		// look at player
+		crosshair.transform.right = player.transform.position - transform.position;
+
+		// switch sprite
+		float xDir = Mathf.Sign(player.transform.position.x - transform.position.x);
+		graphics.transform.localScale = new Vector3(xDir, graphics.transform.localScale.y, graphics.transform.localScale.z);
+	}
+
+
+	private void MoveAndShoot()
+	{
+		if (changeDirectionTimestamp < Time.time)
+		{
+			currentSpeed = Random.Range(speedMinMax.x, speedMinMax.y);
+			currentMoveDirection = Random.insideUnitCircle.normalized;
+			changeDirectionTimestamp = Time.time + Random.Range(changeDirectionsIntervallMinMax.x, changeDirectionsIntervallMinMax.y);
+		}
+
+		rb.velocity = currentSpeed * Time.deltaTime * currentMoveDirection;
+
+		if (shootTimestamp < Time.time)
+		{
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, (player.transform.position - transform.position).magnitude);
+			//if (hit.collider.CompareTag("Player"))
+			{
+				Shoot();
+				shootTimestamp = Time.time + Random.Range(shootIntervallMinMax.x, shootIntervallMinMax.y);
+			}
+		}
+	}
+
 	public bool Hit(int number)
 	{
 		bool numberHits = false;
@@ -139,11 +183,12 @@ public class Enemy : MonoBehaviour
 	private void Die()
 	{
 		Instantiate(deathEffect, transform.position, Quaternion.identity);
+		Destroy(this.gameObject);
 	}
 
 	private void Shoot()
 	{
-		Instantiate(bulletPrefab, crosshair.transform.position, Quaternion.identity).transform.up = player.transform.position - transform.position;
+		Instantiate(bulletPrefab, crosshair.transform.position, Quaternion.identity).transform.right = player.transform.position - transform.position;
 	}
 
 	[System.Serializable]
