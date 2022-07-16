@@ -123,6 +123,20 @@ public class PlayerController : MonoBehaviour
         gun.transform.localPosition = new Vector3(1f, 0.05001628f, 0f);
         currentEquippedGun = gun.GetComponent<Gun>();
         currentEquippedGun.SetEquiped(true);
+
+        //set magazine UI
+        GameObject UIContainer = GameObject.FindGameObjectWithTag("MagUIContainer");
+        int magSize = currentEquippedGun.GetMagSize();
+        foreach (Transform child in UIContainer.transform)
+        {
+            if (child.GetSiblingIndex() >= magSize)
+            {
+                child.gameObject.SetActive(false);
+            } else
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
     }
 
 }

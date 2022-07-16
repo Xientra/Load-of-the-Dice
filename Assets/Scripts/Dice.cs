@@ -24,8 +24,13 @@ public class Dice
 
     public int ThrowDice()
     {
-        int rand = Random.Range(1, value);
+        int rand = Random.Range(1, value + 1);
         Debug.Log(rand);
         return rand;
+    }
+
+    public int GetValue()
+    {
+        return value;
     }
 }
