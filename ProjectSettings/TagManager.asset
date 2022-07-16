@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DiceUIContainer
   - Enemy
+  - MagUIContainer
   layers:
   - Default
   - TransparentFX
