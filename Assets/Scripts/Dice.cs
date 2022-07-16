@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dice : MonoBehaviour
+public class Dice
 {
     private int value;
+
     public Dice(int value)
     {
         this.value = value;

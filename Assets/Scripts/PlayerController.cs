@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public PlayerControls playerControls;
     public GameObject bullet;
     public GameObject diceButton;
+    public GameObject currentGun;
+    private Gun currentEquippedGun;
     private Vector2 relativeMousePos;
     [SerializeField] float moveSpeed = 5;
     private float rollDurationCD = 2f;
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.Fire.performed += _ => OnFire();
         playerControls.Player.Reload.performed += _ => OnReload();
         rb = GetComponent<Rigidbody2D>();
+        currentEquippedGun = currentGun.transform.GetChild(0).GetComponent<Gun>();
     }
 
     private void OnEnable()
@@ -39,20 +42,25 @@ public class PlayerController : MonoBehaviour
     {
         playerControls.Disable();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         dices.Add(new Dice(4));
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
+
+        //get current mouse direction relative to the player
         Vector3 mousePosition = playerControls.Player.MousePosition.ReadValue<Vector2>();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        //Debug.Log(mousePosition);
         relativeMousePos = mousePosition - transform.position;
+
+        currentGun.transform.right = relativeMousePos;
+        Transform gun = currentGun.transform.GetChild(0);
+        gun.localScale = new Vector3(gun.localScale.x, Mathf.Sign(relativeMousePos.x), gun.localScale.z);
+
         if (!rollReady)
         {
             rollDuration += Time.deltaTime;
@@ -70,29 +78,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        if (damageRolls.Count > 0)
-        {
-            Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
-            spawnedBullet.transform.up = relativeMousePos;
-            spawnedBullet.SetDamage(damageRolls[0]);
-            damageRolls.RemoveAt(0);
-            selectedDice.RemoveAt(0);
-        }
-        
+        currentEquippedGun.Shoot(bullet, relativeMousePos);        
     }
 
     public void OnReload()
     {
-        if (rollReady)
-        {
-            foreach (Dice d in selectedDice)
-            {
-                damageRolls.Add(d.ThrowDice());
-            }
-            rollReady = false;
-            rollDuration = 0;
-        }
-        
+        currentEquippedGun.ReloadGun();        
     }
 
     public void AddDiceToMag(Dice dice, DiceDataStorage button)
@@ -107,7 +98,31 @@ public class PlayerController : MonoBehaviour
     {
         //dices.Add(dice);
         GameObject UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
-        Instantiate(diceButton, UIContainer.transform);
+        DiceDataStorage UIDice = Instantiate(diceButton, UIContainer.transform).GetComponent<DiceDataStorage>();
+        UIDice.SetDice(dice);
+    }
+
+    public Gun GetEquippedGun()
+    {
+        return currentEquippedGun;
+    }
+
+    public void EquipGun(GameObject gun)
+    {
+        //remove old gun and equip the new one
+        currentGun.transform.right = new Vector3(1, 0, 0);
+        currentEquippedGun.SetEquiped(false);
+
+        Transform gun1 = currentGun.transform.GetChild(0);
+        gun1.localScale = new Vector3(1, 1, 1);
+
+        currentGun.transform.DetachChildren();
+        gun1.position = gun.transform.position;
+
+        gun.transform.parent = currentGun.transform;
+        gun.transform.localPosition = new Vector3(1f, 0.05001628f, 0f);
+        currentEquippedGun = gun.GetComponent<Gun>();
+        currentEquippedGun.SetEquiped(true);
     }
 
 }

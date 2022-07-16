@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Bullet : MonoBehaviour
 {
     Rigidbody2D rb;
-    float damage = 0;
+    int damage = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +20,19 @@ public class Bullet : MonoBehaviour
         
     }
 
-    public void SetDamage(float damage)
+    public void SetDamage(int damage)
     {
         this.damage = damage;
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemy.Hit(damage);
+        }
+    }
+
+
 }
