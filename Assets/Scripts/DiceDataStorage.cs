@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
 {
     public Dice dice;
+    private bool active = true;
+    private float cooldown = 1f;
+    private float currentCD = 0f;
+
     private void Start()
     {
         if (dice == null)
@@ -14,6 +18,21 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
             dice = new Dice(4);
         }
     }
+
+    private void Update()
+    {
+        if (!active)
+        {
+            currentCD += Time.deltaTime;
+            transform.GetChild(0).GetComponent<Image>().fillAmount = currentCD / cooldown;
+            if (currentCD >= cooldown)
+            {
+                active = true;
+                currentCD = 0;
+            }
+        }
+    }
+
     public void SetDice(Dice dice)
     {
         this.dice = dice;
@@ -26,13 +45,18 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        player.AddDice(dice, this);
-        GetComponent<Button>().interactable = false;
+        if (active)
+        {
+            PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            player.AddDiceToMag(dice, this);
+            active = false;
+            transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
+        }
+        //GetComponent<Button>().interactable = false;
     }
 
     public void EnableButton()
     {
-        GetComponent<Button>().interactable = false;
+        //GetComponent<Button>().interactable = true;
     }
 }

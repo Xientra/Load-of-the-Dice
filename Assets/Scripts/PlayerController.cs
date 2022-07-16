@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
-public class PlayerController : MonoBehaviour, IPointerDownHandler
+public class PlayerController : MonoBehaviour
 {
+    private Rigidbody2D rb;
     public PlayerControls playerControls;
     public GameObject bullet;
+    public GameObject diceButton;
     private Vector2 relativeMousePos;
+    [SerializeField] float moveSpeed = 5;
     private float rollDurationCD = 2f;
     private float rollDuration = 0;
     private int maxMagazine = 6;
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler
         playerControls.Player.Move.ReadValue<Vector2>();
         playerControls.Player.Fire.performed += _ => OnFire();
         playerControls.Player.Reload.performed += _ => OnReload();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -44,6 +48,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
+        Move();
         Vector3 mousePosition = playerControls.Player.MousePosition.ReadValue<Vector2>();
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         //Debug.Log(mousePosition);
@@ -56,6 +61,11 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler
                 rollReady = true;
             }
         }
+    }
+
+    private void Move()
+    {
+        rb.velocity = playerControls.Player.Move.ReadValue<Vector2>() * moveSpeed;
     }
 
     public void OnFire()
@@ -85,7 +95,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler
         
     }
 
-    public void AddDice(Dice dice, DiceDataStorage button)
+    public void AddDiceToMag(Dice dice, DiceDataStorage button)
     {
         if (selectedDice.Count < maxMagazine)
         {
@@ -93,8 +103,11 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void PickUpDice(Dice dice)
     {
-        throw new System.NotImplementedException();
+        //dices.Add(dice);
+        GameObject UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
+        Instantiate(diceButton, UIContainer.transform);
     }
+
 }
