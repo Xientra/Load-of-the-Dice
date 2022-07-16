@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
 					break;
 				// add even or odd
 				case 2:
-					if (Random.Range(0, 1) == 0)
+					if (Random.Range(0, 1 + 1) == 0)
 					{
 						life.onlyEven = true;
 						life.onlyOdd = false;
