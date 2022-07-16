@@ -50,13 +50,14 @@ public class Room : MonoBehaviour
 		triggerLeft = leftPos.GetComponentInChildren<NextRoomTrigger>();
 		triggerRight = rightPos.GetComponentInChildren<NextRoomTrigger>();
 
-		triggerLeft.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomLeft.PlayerEnteredRoom(args.gameObject); };
-		triggerRight.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomRight.PlayerEnteredRoom(args.gameObject); };
+		triggerLeft.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomLeft.PlayerEnteredRoom(args.gameObject, true); };
+		triggerRight.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomRight.PlayerEnteredRoom(args.gameObject, false); };
+
+		cam = Camera.main.GetComponent<CameraMovement>();
 	}
 
 	private void Start()
 	{
-		cam = Camera.main.GetComponent<CameraMovement>();
 	}
 
 	private void Update()
@@ -106,13 +107,14 @@ public class Room : MonoBehaviour
 
 	}
 
-	public void PlayerEnteredRoom(GameObject player)
+	public void PlayerEnteredRoom(GameObject player, bool fromTheRight = false)
 	{
 		// move cam
 		cam.MoveToPosition(new Vector3(transform.position.x, transform.position.y, cam.transform.position.z));
 
 		// move player
-		if ((player.transform.position - leftPos.transform.position).sqrMagnitude < (player.transform.position - rightPos.transform.position).sqrMagnitude)
+		//if ((player.transform.position - leftPos.transform.position).sqrMagnitude < (player.transform.position - rightPos.transform.position).sqrMagnitude)
+		if (fromTheRight == false)
 			player.transform.position = leftPos.transform.position;
 		else
 			player.transform.position = rightPos.transform.position;
