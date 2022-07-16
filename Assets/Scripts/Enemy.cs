@@ -139,6 +139,7 @@ public class Enemy : MonoBehaviour
 	private void Die()
 	{
 		Instantiate(deathEffect, transform.position, Quaternion.identity);
+		Destroy(this.gameObject);
 	}
 
 	private void Shoot()

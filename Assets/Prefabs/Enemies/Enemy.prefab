@@ -370,14 +370,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 100
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3482016441165490532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
   crosshair: {fileID: 3482016441224820201}
   text: {fileID: 3482016442293727475}
   bulletPrefab: {fileID: 0}
-  deathEffect: {fileID: 0}
+  deathEffect: {fileID: 2763562981456686436, guid: 7785e889e246d3f47a83ee55a5191a25, type: 3}
   maxNumber: 6
   difficulty: 0
   life:
@@ -402,8 +402,8 @@ MonoBehaviour:
     numberRange: {x: 0, y: 0}
     onlyOdd: 0
     onlyEven: 0
-  allNumbers: 00000000
-  DEBUG_numbersString: 0
+  allNumbers: 
+  DEBUG_numbersString: 
 --- !u!1 &3482016441224820201
 GameObject:
   m_ObjectHideFlags: 0
