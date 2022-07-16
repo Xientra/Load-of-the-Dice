@@ -12,6 +12,23 @@ TABLE TOP STUFF / RPG STUFF
 man will konstant das RNG des spiels verändern / manipulieren
 
 
+Sounds:
+	enemy
+		kill enemy
+		hit enemy
+		enemy fire
+	player
+		fire
+		player walk
+		get hit
+		die
+	pickup gun
+	clear room
+	hit wall
+	dice roll + reload
+	
+
+
 Assets:
 	Gegner
 		Melee Enemy

@@ -17,14 +17,22 @@ public class GameManager : MonoBehaviour
 	public int roomsPerFloor = 5;
 	public int floorCount = 3;
 
+	public int[] maxCountPerFloor = new int[] { 6, 12, 20 };
+
 	private void Start()
 	{
 		if (roomParent == null)
 			roomParent = this.gameObject;
 
 		player = FindObjectOfType<PlayerLife>();
+		player.OnDeath += Player_OnDeath;
 
 		SpawnGame();
+	}
+
+	private void Player_OnDeath(object sender, System.EventArgs e)
+	{
+		Debug.Log("Player Died could end game here.");
 	}
 
 	private void SpawnGame()
@@ -37,6 +45,7 @@ public class GameManager : MonoBehaviour
 				if (floorI == 0 && roomI == 0)
 				{
 					startRoom.PlayerEnteredRoom(player.gameObject);
+					player.transform.position = startRoom.transform.position;
 					previousRoom = startRoom;
 					continue;
 				}
@@ -47,13 +56,10 @@ public class GameManager : MonoBehaviour
 					previousRoom.roomRight = newRoom;
 				newRoom.roomLeft = previousRoom;
 
+				newRoom.SetAllEnemyDifficulty(maxCountPerFloor[floorI], floorI);
+
 				previousRoom = newRoom;
 			}
 		}
-	}
-
-	private void Update()
-	{
-
 	}
 }

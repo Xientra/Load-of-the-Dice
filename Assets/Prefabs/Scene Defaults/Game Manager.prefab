@@ -47,11 +47,13 @@ MonoBehaviour:
   roomParent: {fileID: 13344722453478013}
   startRoom: {fileID: 6438934715603987534}
   rooms:
-  - {fileID: 6446016618915107575, guid: 63381a0ea2d4a904cadf1f0c3d952b71, type: 3}
+  - {fileID: 8438096120401853800, guid: 2bff80dd492917e48a74b89363485df1, type: 3}
+  - {fileID: 7680457025209914073, guid: abbd989000601584b86f08148708aa74, type: 3}
   endRooms: []
   roomDimensions: {x: 18, y: 11}
   roomsPerFloor: 5
   floorCount: 3
+  maxCountPerFloor: 060000000c00000014000000
 --- !u!1001 &13344721710792377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +108,10 @@ PrefabInstance:
     - target: {fileID: 3014073377042790443, guid: 63381a0ea2d4a904cadf1f0c3d952b71, type: 3}
       propertyPath: m_Name
       value: Start Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446016618915107575, guid: 63381a0ea2d4a904cadf1f0c3d952b71, type: 3}
+      propertyPath: isCleared
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6446016618915107575, guid: 63381a0ea2d4a904cadf1f0c3d952b71, type: 3}
       propertyPath: playerInRoom

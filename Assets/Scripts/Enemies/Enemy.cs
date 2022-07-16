@@ -58,12 +58,12 @@ public class Enemy : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		player = GameObject.FindGameObjectWithTag("Player");
-		Spawn();
+		GenerateNumbers();
 
 		shootTimestamp = Time.time + Random.Range(shootIntervallMinMax.x, shootIntervallMinMax.y);
 	}
 
-	public void Spawn()
+	public void GenerateNumbers()
 	{
 		int normalNumCount = 4;
 

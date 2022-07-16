@@ -30,12 +30,10 @@ public class Room : MonoBehaviour
 
 	[Space(5)]
 
-	public bool DEBUG_isCleared = false;
+	public bool isCleared = false;
 
 	public bool IsCleared()
 	{
-		return DEBUG_isCleared;
-
 		for (int i = 0; i < roomEnemies.Length; i++)
 			if (roomEnemies[i] != null)
 				return false;
@@ -46,6 +44,9 @@ public class Room : MonoBehaviour
 	private void Awake()
 	{
 		roomEnemies = GetComponentsInChildren<Enemy>();
+		for (int i = 0; i < roomEnemies.Length; i++)
+			roomEnemies[i].gameObject.SetActive(false);
+
 
 		triggerLeft = leftPos.GetComponentInChildren<NextRoomTrigger>();
 		triggerRight = rightPos.GetComponentInChildren<NextRoomTrigger>();
@@ -62,11 +63,12 @@ public class Room : MonoBehaviour
 
 	private void Update()
 	{
-		bool isClear = IsCleared();
+		if (IsCleared())
+			isCleared = true;
 
 		if (playerInRoom)
 		{
-			if (isClear)
+			if (isCleared)
 			{
 				leftPos.SetActive(roomLeft != null);
 				rightPos.SetActive(roomRight != null);
@@ -93,18 +95,27 @@ public class Room : MonoBehaviour
 		}
 
 
-		if (wasClearedLastFrame == false && isClear)
+		if (wasClearedLastFrame == false && isCleared)
 		{
 			// spawn gatcha here
 		}
 
-		wasClearedLastFrame = isClear;
+		wasClearedLastFrame = isCleared;
 	}
 
 	public void PlayLeftRoom()
 	{
 		playerInRoom = false;
+	}
 
+	public void SetAllEnemyDifficulty(int maxNumber, int difficulty)
+	{
+		foreach (Enemy enemy in roomEnemies)
+		{
+			enemy.maxNumber = maxNumber;
+			enemy.difficulty = difficulty;
+			enemy.GenerateNumbers();
+		}
 	}
 
 	public void PlayerEnteredRoom(GameObject player, bool fromTheRight = false)
