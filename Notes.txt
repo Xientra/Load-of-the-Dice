@@ -38,6 +38,7 @@ Programming:
 
 	Gegner
 		dificulty increase
+		move and shoot
 
 	Player Movement
 
