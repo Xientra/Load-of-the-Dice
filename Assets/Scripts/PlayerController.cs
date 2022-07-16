@@ -8,6 +8,7 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private AudioSource audioSource;
     public PlayerControls playerControls;
     public GameObject bullet;
     public GameObject diceButton;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.DiceNine.performed += _ => Button(9);
         playerControls.Player.DiceTen.performed += _ => Button(10);
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         currentEquippedGun = currentGun.transform.GetChild(0).GetComponent<Gun>();
     }
 
@@ -96,6 +98,18 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = playerControls.Player.Move.ReadValue<Vector2>() * moveSpeed;
         sprite.transform.localScale = new Vector3(Mathf.Sign(rb.velocity.x), 1, 1);
+        if (rb.velocity != Vector2.zero)
+        {
+            audioSource.pitch = UnityEngine.Random.Range(0.8f, 1f);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Stop();
+        }
     }
 
     public void OnFire()
