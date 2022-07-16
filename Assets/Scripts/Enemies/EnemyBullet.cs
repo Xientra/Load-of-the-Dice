@@ -13,6 +13,8 @@ public class EnemyBullet : MonoBehaviour
 		PlayerLife player = collision.GetComponent<PlayerLife>();
 		if (player != null)
 			player.TakeDamage();
+
+		Die();
 	}
 
 	private void Die()
