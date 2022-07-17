@@ -9,12 +9,17 @@ public class Bullet : MonoBehaviour
     int damage = 0;
     private int amount = 0;
 
+    public DiceNumberParticle diceNumberPrefab;
+
+
     private Gun.Chamber effects;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = 20 * transform.up;
+
+        diceNumberPrefab.Show(transform.position, damage);
     }
 
     // Update is called once per frame
@@ -67,7 +72,10 @@ public class Bullet : MonoBehaviour
                 int mult = effects.GetMultiplier();
                 damage = Mathf.Abs(mult) == 1 ? damage + effects.GetMultiplier() : (Mathf.Sign(mult) == 1 ? damage * 2 : damage / 2);
                 amount--;
-            } else
+
+                diceNumberPrefab.Show(transform.position, damage);
+            }
+            else
             {
                 Destroy(this.gameObject);
             }

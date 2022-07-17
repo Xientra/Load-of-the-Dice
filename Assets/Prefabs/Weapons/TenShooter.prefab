@@ -162,6 +162,7 @@ MonoBehaviour:
   rarity: 2
   maxMagazine: 10
   rateOfFire: 180
+  chambers: []
   muzzlePosition: {fileID: 1423153717488150796}
   muzzleEffectPrefab: {fileID: 3582826067169783155, guid: af4e001fe5b59a54b8756cc25dfa3d08, type: 3}
 --- !u!61 &8500049819363009257
