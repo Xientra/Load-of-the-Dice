@@ -75,7 +75,7 @@ public class Gun : PickupItem
 
             if (chambers[chamberCount].GetThreeBurstRow())
             {
-                StartCoroutine(ThreeBurst(bullet, relativeMousePos));
+                StartCoroutine(ThreeBurst(bullet));
             }
 
             // effects
@@ -98,16 +98,16 @@ public class Gun : PickupItem
         }
     }
 
-    IEnumerator ThreeBurst(GameObject bullet, Vector2 relativeMousePos)
+    IEnumerator ThreeBurst(GameObject bullet)
     {
         yield return new WaitForSeconds(0.1f);
         Bullet spawnedBullet1 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-        spawnedBullet1.transform.up = relativeMousePos;
+        spawnedBullet1.transform.up = muzzlePosition.transform.right;
         spawnedBullet1.SetEffects(new Chamber());
 
         yield return new WaitForSeconds(0.1f);
         Bullet spawnedBullet2 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-        spawnedBullet2.transform.up = relativeMousePos;
+        spawnedBullet2.transform.up = muzzlePosition.transform.right;
         spawnedBullet2.SetEffects(new Chamber());
     }
 
