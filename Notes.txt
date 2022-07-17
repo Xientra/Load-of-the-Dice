@@ -10,9 +10,6 @@ TABLE TOP STUFF / RPG STUFF
 
 TODO:
 	soundeffect
-	game end (win / lose)
-	playltest
-	gun generation
 
 
 ---

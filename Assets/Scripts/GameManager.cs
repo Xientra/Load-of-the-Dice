@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
 	{
 		gameResultScreen.SetActive(true);
 		resultLabel.text = "Game Over";
+		player.gameObject.SetActive(false);
 	}
 
 	public void WinGame()
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
 		gameResultScreen.SetActive(false);
 		// enable player
 		player.life = player.maxLife;
+		player.gameObject.SetActive(true);
 	}
 
 	public void Btn_TryAgain()
