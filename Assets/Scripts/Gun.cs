@@ -15,6 +15,7 @@ public class Gun : PickupItem
 
     private List<Dice> selectedDice = new List<Dice>();
     private List<int> damageRolls = new List<int>();
+    public List<Chamber> chambers = new List<Chamber>();
 
     private bool isEquipped = false;
     private int addCounter = 0;
@@ -23,9 +24,24 @@ public class Gun : PickupItem
 
     public GameObject muzzleEffectPrefab;
 
+    private int chamberCount = 0;
+
+
     void Start()
     {
         bc = GetComponent<BoxCollider2D>();
+        for (int i = 0; i < maxMagazine; i++)
+        {
+            Chamber chamber = new Chamber();
+            chamber.SetMultiplier(UnityEngine.Random.Range(-2, 3));
+            chamber.SetAmount(UnityEngine.Random.Range(1, 5));
+            if (i == 3) chamber.Ricochet();
+            if (i == 4) chamber.Pierce();
+            if (i == 5) chamber.Rebound();
+            if (i == 6) chamber.ThreeBurstSpread();
+            if (i == 1) chamber.ThreeBurstRow();
+            chambers.Add(chamber);
+        }
     }
 
 	public void AddDiceToMag(Dice dice)
@@ -45,6 +61,22 @@ public class Gun : PickupItem
         if (damageRolls.Count > 0 && allowFire)
         {
             UpdateMagUI();
+            if (chambers[chamberCount].GetThreeBurstSpread())
+            {
+                Bullet spawnedBullet1 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
+                Bullet spawnedBullet2 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
+                spawnedBullet1.transform.up = relativeMousePos;
+                spawnedBullet1.SetEffects(new Chamber());
+                spawnedBullet1.transform.Rotate(new Vector3(0, 0, 20));
+                spawnedBullet2.transform.up = relativeMousePos;
+                spawnedBullet2.SetEffects(new Chamber());
+                spawnedBullet2.transform.Rotate(new Vector3(0, 0, -20));
+            }
+
+            if (chambers[chamberCount].GetThreeBurstRow())
+            {
+                StartCoroutine(ThreeBurst(bullet, relativeMousePos));
+            }
 
             // effects
             Instantiate(muzzleEffectPrefab, muzzlePosition.transform.position, Quaternion.identity).transform.right = transform.right;
@@ -52,6 +84,7 @@ public class Gun : PickupItem
             Bullet spawnedBullet = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
             spawnedBullet.transform.up = relativeMousePos;
             spawnedBullet.SetDamage(damageRolls[0]);
+            spawnedBullet.SetEffects(chambers[chamberCount]);
             damageRolls.RemoveAt(0);
             selectedDice.RemoveAt(0);
             allowFire = false;
@@ -61,7 +94,21 @@ public class Gun : PickupItem
             {
                 loaded = false;
             }
+            chamberCount++;
         }
+    }
+
+    IEnumerator ThreeBurst(GameObject bullet, Vector2 relativeMousePos)
+    {
+        yield return new WaitForSeconds(0.1f);
+        Bullet spawnedBullet1 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
+        spawnedBullet1.transform.up = relativeMousePos;
+        spawnedBullet1.SetEffects(new Chamber());
+
+        yield return new WaitForSeconds(0.1f);
+        Bullet spawnedBullet2 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
+        spawnedBullet2.transform.up = relativeMousePos;
+        spawnedBullet2.SetEffects(new Chamber());
     }
 
     private void UpdateMagUI()
@@ -102,6 +149,7 @@ public class Gun : PickupItem
                 loaded = true;
             }
             addCounter = 0;
+            chamberCount = 0;
         }
         
         //rollReady = false;
@@ -162,4 +210,36 @@ public class Gun : PickupItem
     {
         return maxMagazine;
     }
+
+    [System.Serializable]
+    public class Chamber
+    {
+        bool ricochet = false;
+        bool pierce = false;
+        bool rebound = false;
+        bool threeBurstSpread = false;
+        bool threeBurstRow = false;
+        int multiplier;
+        int amount;
+
+        public void SetAmount(int i) { amount = i;  }
+        public int GetAmount() { return amount; }
+
+        public void SetMultiplier(int i) { multiplier = i; }
+        public int GetMultiplier() { return multiplier; }
+
+        public void Ricochet() { ricochet = true; }
+        public void Pierce() { pierce = true; }
+        public void Rebound() { rebound = true; }
+        public void ThreeBurstSpread() { threeBurstSpread = true; }
+        public void ThreeBurstRow() { threeBurstRow = true; }
+
+        public bool GetRicochet() { return ricochet; }
+        public bool GetPierce() { return pierce; }
+        public bool GetRebound() { return rebound; }
+        public bool GetThreeBurstSpread() { return threeBurstSpread; }
+        public bool GetThreeBurstRow() { return threeBurstRow; }
+
+    }
+
 }
