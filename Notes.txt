@@ -11,9 +11,9 @@ TABLE TOP STUFF / RPG STUFF
 TODO:
 	soundeffect
 	game end (win / lose)
-	more rooms
 	playltest
 	gun generation
+	retaliation
 
 
 ---

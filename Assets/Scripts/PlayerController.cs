@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
             currentEquippedGun.transform.SetParent(null, true);
             currentEquippedGun.transform.position = gun.transform.position;
+            currentEquippedGun.transform.localScale = Vector3.one;
         }
 
         gun.transform.parent = gunPosition.transform;
