@@ -50,8 +50,16 @@ MonoBehaviour:
   tutorial: {fileID: 2123911157939443596}
   startRoom: {fileID: 6438934715603987534}
   rooms:
+  - {fileID: 8438096120401853800, guid: 60cee1b437c10e64ea26e8792878b80f, type: 3}
   - {fileID: 8438096120401853800, guid: 2bff80dd492917e48a74b89363485df1, type: 3}
+  - {fileID: 5632164976416649004, guid: d2499b2a42aeba141ac7ae619590d1b9, type: 3}
   - {fileID: 7680457025209914073, guid: abbd989000601584b86f08148708aa74, type: 3}
+  - {fileID: 2578229316454162809, guid: a6f8ae285a2761f4c8a3857e8faf75a8, type: 3}
+  - {fileID: 2578229316454162809, guid: a84133b88546be143a57d27ff8694b9d, type: 3}
+  - {fileID: 8438096120401853800, guid: f102623a55ce8b247960f7dcc5bb634e, type: 3}
+  - {fileID: 5632164976416649004, guid: ecd55e12d29bee941a28d96eaf5940eb, type: 3}
+  - {fileID: 2578229316454162809, guid: 3a6ef4a81f3666d4aa6114ed41ba9fdb, type: 3}
+  - {fileID: 5632164976416649004, guid: c69d4615351eb29439ffad007b66180e, type: 3}
   endRooms: []
   roomDimensions: {x: 18, y: 11}
   roomsPerFloor: 5
