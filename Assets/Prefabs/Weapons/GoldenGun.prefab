@@ -162,6 +162,26 @@ MonoBehaviour:
   rarity: 1
   maxMagazine: 1
   rateOfFire: 180
+  effectSprites:
+  - {fileID: 21300000, guid: 015014f1094fa424da6138c1c63901c7, type: 3}
+  - {fileID: 21300000, guid: 163c760a025145b44ba1b417d803e008, type: 3}
+  - {fileID: 21300000, guid: cddca6320c36220499507a1288d37785, type: 3}
+  - {fileID: 21300000, guid: b590e3bbccee55a458355f628f9f5c27, type: 3}
+  - {fileID: 21300000, guid: 5f68f7171bcddbc47be7c7875c9f2749, type: 3}
+  - {fileID: 21300000, guid: 1054be5761f6a9843acab53f7110c28c, type: 3}
+  - {fileID: 21300000, guid: 55629ad9e594c0c48abf847817b140fb, type: 3}
+  - {fileID: 21300000, guid: 649438260635cd643951d0cc34ccd5cb, type: 3}
+  - {fileID: 21300000, guid: 79c9ab381bfc1374691f61be0deed5f5, type: 3}
+  - {fileID: 21300000, guid: 775f0df86fb62b0459a9eabc6c7b3a4e, type: 3}
+  - {fileID: 21300000, guid: 4ab77c372ca611a42b484abd227a382c, type: 3}
+  - {fileID: 21300000, guid: 5d1e3e63f8e64dc44ac92f1c182d56b7, type: 3}
+  - {fileID: 21300000, guid: 5b21ae2b29212e84ba10f903089cacc6, type: 3}
+  - {fileID: 21300000, guid: c3c295f4dad67124ea96f9c1bc45e0c9, type: 3}
+  - {fileID: 21300000, guid: 67c85dc887761364da4421063f9903ba, type: 3}
+  - {fileID: 21300000, guid: 84baf568860a2bc49a3da5b24d3a5ef1, type: 3}
+  - {fileID: 21300000, guid: a87b9d3f2b8d81841adc9e395f61f40f, type: 3}
+  - {fileID: 21300000, guid: 75284dd4075b3ec48ba0134f20232363, type: 3}
+  - {fileID: 21300000, guid: 9053d25c1b62696489b888babe5f938d, type: 3}
   chambers: []
   muzzlePosition: {fileID: 940119522388702761}
   muzzleEffectPrefab: {fileID: 3582826067169783155, guid: af4e001fe5b59a54b8756cc25dfa3d08, type: 3}

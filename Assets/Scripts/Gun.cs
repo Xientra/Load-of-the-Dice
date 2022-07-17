@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Gun : PickupItem
 {
@@ -13,11 +15,18 @@ public class Gun : PickupItem
     private bool allowFire = true;
     private bool loaded = false;
 
+    [Space(5)]
+    public List<Sprite> effectSprites;
+
+    [Space(5)]
+
     private List<Dice> selectedDice = new List<Dice>();
     private List<int> damageRolls = new List<int>();
     public List<Chamber> chambers = new List<Chamber>();
 
     private bool isEquipped = false;
+    public bool IsEquipped { get => isEquipped; }
+
     private int addCounter = 0;
 
     public GameObject muzzlePosition;
@@ -44,7 +53,7 @@ public class Gun : PickupItem
         }
     }
 
-	public void AddDiceToMag(Dice dice)
+    public void AddDiceToMag(Dice dice)
     {
         GameObject UIContainer = GameObject.FindGameObjectWithTag("MagUIContainer");
 
@@ -68,15 +77,15 @@ public class Gun : PickupItem
 
     public void Shoot(GameObject bullet, Vector2 relativeMousePos)
     {
-        if (damageRolls.Count > 0 && allowFire)
+        if (damageRolls.Count > 0 && allowFire && !IsMouseOverUI())
         {
             UpdateMagUI();
             if (chambers[chamberCount].GetThreeBurstSpread())
             {
-                Bullet spawnedBullet1 = SpawnBullet(bullet, damageRolls[0], null);
+                Bullet spawnedBullet1 = SpawnBullet(bullet, AfterEffectDamage(chambers[chamberCount], damageRolls[0]), null);
                 spawnedBullet1.transform.Rotate(new Vector3(0, 0, 20));
 
-                Bullet spawnedBullet2 = SpawnBullet(bullet, damageRolls[0], null);
+                Bullet spawnedBullet2 = SpawnBullet(bullet, AfterEffectDamage(chambers[chamberCount], damageRolls[0]), null);
                 spawnedBullet2.transform.Rotate(new Vector3(0, 0, -20));
             }
 
@@ -105,6 +114,9 @@ public class Gun : PickupItem
                 {
                     child.GetComponent<DiceDataStorage>().EnableButton();
                 }
+
+                //reset mag effects
+                SetupMagUI();
             }
             chamberCount++;
         }
@@ -113,10 +125,10 @@ public class Gun : PickupItem
     IEnumerator ThreeBurst(GameObject bullet, int damage)
     {
         yield return new WaitForSeconds(0.1f);
-        SpawnBullet(bullet, damage, null);
+        SpawnBullet(bullet, damage + 1, null);
 
         yield return new WaitForSeconds(0.1f);
-        SpawnBullet(bullet, damage, null);
+        SpawnBullet(bullet, damage + 2, null);
     }
 
     private Bullet SpawnBullet(GameObject bullet, int damage, Chamber chamber)
@@ -136,11 +148,72 @@ public class Gun : PickupItem
             if (child.GetSiblingIndex() != UIContainer.transform.childCount - 1)
             {
                 child.GetChild(0).GetComponent<TMP_Text>().SetText(UIContainer.transform.GetChild(child.GetSiblingIndex() + 1).GetChild(0).GetComponent<TMP_Text>().text);
-            } else
+                child.GetChild(1).GetChild(0).GetComponent<Image>().sprite = UIContainer.transform.GetChild(child.GetSiblingIndex() + 1).GetChild(1).GetChild(0).GetComponent<Image>().sprite;
+            }
+            else
             {
                 child.GetChild(0).GetComponent<TMP_Text>().SetText("");
+                child.GetChild(1).GetChild(0).GetComponent<Image>().sprite = effectSprites[18];
             }
         }
+    }
+
+    private void SetupMagUI()
+    {
+        GameObject UIContainer = GameObject.FindGameObjectWithTag("MagUIContainer");
+        foreach (Transform child in UIContainer.transform)
+        {
+            if (child.GetSiblingIndex() < chambers.Count)
+            {
+                child.GetChild(0).GetComponent<TMP_Text>().SetText("");
+                Sprite sprite = ChamberToString(chambers[child.GetSiblingIndex()]);
+                child.GetChild(1).GetChild(0).GetComponent<Image>().sprite = sprite;
+                Debug.Log(child.GetChild(1).GetChild(0).name);
+            }
+        }
+    }
+
+    private Sprite ChamberToString(Chamber chamber)
+    {
+        int mult = chamber.GetMultiplier();
+        if (chamber.GetRicochet())
+        {
+            if (mult == 1) return effectSprites[0];
+            if (mult == -1) return effectSprites[1];
+            if (mult == -2) return effectSprites[2];
+            if (mult == 2) return effectSprites[3];
+        }
+
+        if (chamber.GetThreeBurstRow())
+        {
+            if (mult == 1) return effectSprites[4];
+            if (mult == -1) return effectSprites[5];
+        }
+
+        if (chamber.GetPierce())
+        {
+            if (mult == 1) return effectSprites[6];
+            if (mult == -1) return effectSprites[7];
+            if (mult == -2) return effectSprites[8];
+            if (mult == 2) return effectSprites[9];
+        }
+
+        if (chamber.GetRebound())
+        {
+            if (mult == 1) return effectSprites[10];
+            if (mult == -1) return effectSprites[11];
+            if (mult == -2) return effectSprites[12];
+            if (mult == 2) return effectSprites[13];
+        }
+
+        if (chamber.GetThreeBurstSpread())
+        {
+            if (mult == 1) return effectSprites[14];
+            if (mult == -1) return effectSprites[15];
+            if (mult == -2) return effectSprites[16];
+            if (mult == 2) return effectSprites[17];
+        }
+        return effectSprites[18];
     }
 
     IEnumerator RPMLimit()
@@ -172,7 +245,7 @@ public class Gun : PickupItem
                 child.GetComponent<DiceDataStorage>().DisableButton();
             }
         }
-        
+
         //rollReady = false;
         //rollDuration = 0;
     }
@@ -186,7 +259,7 @@ public class Gun : PickupItem
 
         for (int i = 0; i <= 20; i++)
         {
-            randomDiceSide = UnityEngine.Random.Range(1, d.GetValue()+1);
+            randomDiceSide = UnityEngine.Random.Range(1, d.GetValue() + 1);
 
             UIContainer.transform.GetChild(counter).GetChild(0).GetComponent<TMP_Text>().SetText("" + randomDiceSide);
 
@@ -218,13 +291,21 @@ public class Gun : PickupItem
             StartCoroutine(IFrames());
         }
         else
+        {
             bc.enabled = false;
+            SetupMagUI();
+        }
     }
 
     IEnumerator IFrames()
     {
         yield return new WaitForSeconds(1f);
         bc.enabled = true;
+    }
+
+    private bool IsMouseOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 
     public int GetMagSize()
@@ -237,6 +318,12 @@ public class Gun : PickupItem
         return loaded;
     }
 
+    private int AfterEffectDamage(Chamber effects, int damage)
+    {
+        int mult = effects.GetMultiplier();
+        return Mathf.Abs(mult) == 1 ? damage + effects.GetMultiplier() : (Mathf.Sign(mult) == 1 ? damage * 2 : damage / 2);
+    }
+
     [System.Serializable]
     public class Chamber
     {
@@ -245,26 +332,48 @@ public class Gun : PickupItem
         bool rebound = false;
         bool threeBurstSpread = false;
         bool threeBurstRow = false;
+        bool noEffect = true;
         int multiplier;
         int amount;
 
-        public void SetAmount(int i) { amount = i;  }
+        public void SetAmount(int i) { amount = i; }
         public int GetAmount() { return amount; }
 
         public void SetMultiplier(int i) { multiplier = i; }
         public int GetMultiplier() { return multiplier; }
 
-        public void Ricochet() { ricochet = true; }
-        public void Pierce() { pierce = true; }
-        public void Rebound() { rebound = true; }
-        public void ThreeBurstSpread() { threeBurstSpread = true; }
-        public void ThreeBurstRow() { threeBurstRow = true; }
+        public void Ricochet()
+        {
+            ricochet = true;
+            noEffect = false;
+        }
+        public void Pierce()
+        {
+            pierce = true;
+            noEffect = false;
+        }
+        public void Rebound()
+        {
+            rebound = true;
+            noEffect = false;
+        }
+        public void ThreeBurstSpread()
+        {
+            threeBurstSpread = true;
+            noEffect = false;
+        }
+        public void ThreeBurstRow()
+        {
+            threeBurstRow = true;
+            noEffect = false;
+        }
 
         public bool GetRicochet() { return ricochet; }
         public bool GetPierce() { return pierce; }
         public bool GetRebound() { return rebound; }
         public bool GetThreeBurstSpread() { return threeBurstSpread; }
         public bool GetThreeBurstRow() { return threeBurstRow; }
+        public bool GetNoEffect() { return noEffect; }
 
     }
 

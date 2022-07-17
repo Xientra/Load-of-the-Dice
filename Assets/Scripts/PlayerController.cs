@@ -118,7 +118,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        currentEquippedGun.Shoot(bullet, relativeMousePos);
+        if (currentEquippedGun != null)
+        {
+            currentEquippedGun.Shoot(bullet, relativeMousePos);
+        }
     }
 
     public void OnReload()
