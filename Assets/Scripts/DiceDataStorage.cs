@@ -8,8 +8,14 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
 {
     public Dice dice;
     private bool active = true;
+    private bool disabled = false;
     private float cooldown = 1f;
     private float currentCD = 0f;
+
+    public Image childImage;
+    public Image childImageLoad;
+    public Image disabledOverlay;
+    public List<Sprite> diceImages = new List<Sprite>();
 
     private void Start()
     {
@@ -21,7 +27,7 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
         if (!active)
         {
             currentCD += Time.deltaTime;
-            transform.GetChild(0).GetComponent<Image>().fillAmount = currentCD / cooldown;
+            childImage.fillAmount = currentCD / cooldown;
             if (currentCD >= cooldown)
             {
                 active = true;
@@ -33,7 +39,9 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
     public void SetDice(Dice dice)
     {
         this.dice = dice;
-        Debug.Log(this.dice);
+        cooldown = dice.GetValue() / 2;
+        childImageLoad.sprite = diceImages[dice.GetValue() - 1];
+        childImage.sprite = diceImages[dice.GetValue() - 1];
     }
 
     public Dice GetDice()
@@ -43,19 +51,30 @@ public class DiceDataStorage : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (active)
+        if (active && !disabled)
         {
             PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             Gun gun = player.GetEquippedGun();
             gun.AddDiceToMag(this.dice);
             active = false;
+            DisableButton();
             transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
         }
-        //GetComponent<Button>().interactable = false;
     }
+
+
 
     public void EnableButton()
     {
         //GetComponent<Button>().interactable = true;
+        disabledOverlay.enabled = false;
+        disabled = false;
+    }
+
+    public void DisableButton()
+    {
+        //GetComponent<Button>().interactable = false;
+        disabledOverlay.enabled = true;
+        disabled = true;
     }
 }

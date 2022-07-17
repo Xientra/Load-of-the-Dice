@@ -139,6 +139,10 @@ public class PlayerController : MonoBehaviour
         //dices.Add(dice);
         GameObject UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
         DiceDataStorage UIDice = Instantiate(diceButton, UIContainer.transform).GetComponent<DiceDataStorage>();
+        if (currentEquippedGun.GetLoaded())
+        {
+            UIDice.DisableButton();
+        }
         UIDice.SetDice(dice);
         uiButtons.Add(UIDice);
     }
@@ -170,6 +174,7 @@ public class PlayerController : MonoBehaviour
         int magSize = currentEquippedGun.GetMagSize();
         foreach (Transform child in UIContainer.transform)
         {
+            child.GetComponentInChildren<TMPro.TMP_Text>().SetText("");
             if (child.GetSiblingIndex() >= magSize)
             {
                 child.gameObject.SetActive(false);
@@ -177,6 +182,13 @@ public class PlayerController : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
+        }
+
+        //reenable all UI dice
+        UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
+        foreach (Transform child in UIContainer.transform)
+        {
+            child.GetComponent<DiceDataStorage>().EnableButton();
         }
     }
 

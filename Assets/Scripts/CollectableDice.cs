@@ -26,7 +26,7 @@ public class CollectableDice : PickupItem
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("TES");
+        //Debug.Log("TES");
         if (collision.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();

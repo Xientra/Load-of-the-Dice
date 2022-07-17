@@ -53,6 +53,16 @@ public class Gun : PickupItem
             selectedDice.Add(dice);
             UIContainer.transform.GetChild(addCounter).GetChild(0).GetComponent<TMP_Text>().SetText("D" + dice.GetValue());
             addCounter++;
+
+            if (selectedDice.Count >= maxMagazine)
+            {
+                //disable all UI dice
+                GameObject DiceUIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
+                foreach (Transform child in DiceUIContainer.transform)
+                {
+                    child.GetComponent<DiceDataStorage>().DisableButton();
+                }
+            }
         }
     }
 
@@ -63,52 +73,59 @@ public class Gun : PickupItem
             UpdateMagUI();
             if (chambers[chamberCount].GetThreeBurstSpread())
             {
-                Bullet spawnedBullet1 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-                Bullet spawnedBullet2 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-                spawnedBullet1.transform.up = relativeMousePos;
-                spawnedBullet1.SetEffects(new Chamber());
+                Bullet spawnedBullet1 = SpawnBullet(bullet, damageRolls[0], null);
                 spawnedBullet1.transform.Rotate(new Vector3(0, 0, 20));
-                spawnedBullet2.transform.up = relativeMousePos;
-                spawnedBullet2.SetEffects(new Chamber());
+
+                Bullet spawnedBullet2 = SpawnBullet(bullet, damageRolls[0], null);
                 spawnedBullet2.transform.Rotate(new Vector3(0, 0, -20));
             }
 
             if (chambers[chamberCount].GetThreeBurstRow())
             {
-                StartCoroutine(ThreeBurst(bullet));
+                StartCoroutine(ThreeBurst(bullet, damageRolls[0]));
             }
 
             // effects
             Instantiate(muzzleEffectPrefab, muzzlePosition.transform.position, Quaternion.identity).transform.right = transform.right;
 
-            Bullet spawnedBullet = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-            spawnedBullet.transform.up = relativeMousePos;
-            spawnedBullet.SetDamage(damageRolls[0]);
-            spawnedBullet.SetEffects(chambers[chamberCount]);
+            SpawnBullet(bullet, damageRolls[0], chambers[chamberCount]);
             damageRolls.RemoveAt(0);
             selectedDice.RemoveAt(0);
             allowFire = false;
             StartCoroutine(RPMLimit());
 
+            //last bullet shot
             if (damageRolls.Count <= 0)
             {
                 loaded = false;
+
+                //reenable all UI dice
+                GameObject UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
+                foreach (Transform child in UIContainer.transform)
+                {
+                    child.GetComponent<DiceDataStorage>().EnableButton();
+                }
             }
             chamberCount++;
         }
     }
 
-    IEnumerator ThreeBurst(GameObject bullet)
+    IEnumerator ThreeBurst(GameObject bullet, int damage)
     {
         yield return new WaitForSeconds(0.1f);
-        Bullet spawnedBullet1 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-        spawnedBullet1.transform.up = muzzlePosition.transform.right;
-        spawnedBullet1.SetEffects(new Chamber());
+        SpawnBullet(bullet, damage, null);
 
         yield return new WaitForSeconds(0.1f);
-        Bullet spawnedBullet2 = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
-        spawnedBullet2.transform.up = muzzlePosition.transform.right;
-        spawnedBullet2.SetEffects(new Chamber());
+        SpawnBullet(bullet, damage, null);
+    }
+
+    private Bullet SpawnBullet(GameObject bullet, int damage, Chamber chamber)
+    {
+        Bullet spawnedBullet = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
+        spawnedBullet.transform.up = muzzlePosition.transform.right;
+        spawnedBullet.SetEffects(chamber != null ? chamber : new Chamber());
+        spawnedBullet.SetDamage(damage);
+        return spawnedBullet;
     }
 
     private void UpdateMagUI()
@@ -134,7 +151,7 @@ public class Gun : PickupItem
 
     public void ReloadGun()
     {
-        if (!loaded)
+        if (!loaded && selectedDice.Count > 0)
         {
             int counter = 0;
 
@@ -144,12 +161,16 @@ public class Gun : PickupItem
                 counter++;
             }
 
-            if (selectedDice.Count > 0)
-            {
-                loaded = true;
-            }
+            loaded = true;
             addCounter = 0;
             chamberCount = 0;
+
+            //disable all UI dice
+            GameObject UIContainer = GameObject.FindGameObjectWithTag("DiceUIContainer");
+            foreach (Transform child in UIContainer.transform)
+            {
+                child.GetComponent<DiceDataStorage>().DisableButton();
+            }
         }
         
         //rollReady = false;
@@ -209,6 +230,11 @@ public class Gun : PickupItem
     public int GetMagSize()
     {
         return maxMagazine;
+    }
+
+    public bool GetLoaded()
+    {
+        return loaded;
     }
 
     [System.Serializable]
