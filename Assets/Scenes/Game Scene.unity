@@ -536,6 +536,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 911182547090680518, guid: 692865c85cfc5ee45be8c7434bad26b8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.272
+      objectReference: {fileID: 0}
+    - target: {fileID: 911182547090680518, guid: 692865c85cfc5ee45be8c7434bad26b8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 324.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3025094244457598556, guid: 692865c85cfc5ee45be8c7434bad26b8, type: 3}
       propertyPath: m_ColliderPaths.Array.size
       value: 1
