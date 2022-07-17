@@ -40,6 +40,7 @@ public class Room : MonoBehaviour
 	[Space(5)]
 
 	public bool isCleared = false;
+	public bool checkCleared = true;
 
 	public bool IsCleared()
 	{
@@ -89,7 +90,7 @@ public class Room : MonoBehaviour
 
 	private void Update()
 	{
-		if (IsCleared())
+		if (checkCleared && IsCleared())
 			isCleared = true;
 
 		if (playerInRoom)

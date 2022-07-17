@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
 	public GameObject roomParent;
 
+	public Tutorial tutorial;
 	public Room startRoom;
 
 	public Room[] rooms;
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
 	public void Btn_Play()
 	{
 		// set tutorial on
-
+		tutorial.StartTutorial(player);
 
 		// set player on
 		player.gameObject.SetActive(true);

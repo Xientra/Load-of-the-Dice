@@ -155,11 +155,14 @@ public class PlayerController : MonoBehaviour
     public void EquipGun(GameObject gun)
     {
         //remove old gun and equip the new one
-        currentGun.transform.right = new Vector3(1, 0, 0);
-        currentEquippedGun.SetEquiped(false);
+        if (currentEquippedGun != null)
+        {
+            currentGun.transform.right = new Vector3(1, 0, 0);
+            currentEquippedGun.SetEquiped(false);
 
-        currentEquippedGun.transform.SetParent(null, true);
-        currentEquippedGun.transform.position = gun.transform.position;
+            currentEquippedGun.transform.SetParent(null, true);
+            currentEquippedGun.transform.position = gun.transform.position;
+        }
 
         gun.transform.parent = gunPosition.transform;
         gun.transform.localPosition = Vector3.zero;

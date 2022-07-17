@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
 
 	[Header("Numbers:")]
 
+	public bool generateNumbers = true;
+
+	[Space(5)]
+
 	public int maxNumber = 6;
 	public int difficulty = 4;
 
@@ -50,15 +54,18 @@ public class Enemy : MonoBehaviour
 
 	private void OnValidate()
 	{
-		allNumbers = life.GetAllNumbers();
-		DEBUG_numbersString = GetNumbersString();
 	}
 
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		player = GameObject.FindGameObjectWithTag("Player");
-		GenerateNumbers();
+
+		if (generateNumbers)
+			GenerateNumbers();
+
+		allNumbers = life.GetAllNumbers();
+		text.text = GetNumbersString();
 
 		shootTimestamp = Time.time + Random.Range(shootIntervallMinMax.x, shootIntervallMinMax.y);
 	}
