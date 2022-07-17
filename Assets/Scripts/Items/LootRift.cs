@@ -6,6 +6,8 @@ public class LootRift : MonoBehaviour
 {
     public GameObject dropLootEffectPrefab;
 
+    public int floor;
+
     public int numGuns = 2;
     public int numDice = 3;
 

@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
 
 				Room newRoom = Instantiate(rooms[Random.Range(0, rooms.Length)], new Vector3(roomDimensions.x * roomI, roomDimensions.y * floorI), Quaternion.identity, roomParent.transform).GetComponent<Room>();
 
+				newRoom.floor = floorI;
+
 				if (previousRoom != null)
 					previousRoom.roomRight = newRoom;
 

@@ -15,6 +15,8 @@ public class Room : MonoBehaviour
 	public WinObject winObject;
 	public bool spawnWinObject = false;
 
+	public int floor;
+
 	[Space(5)]
 
 	public Room roomLeft;
@@ -127,7 +129,9 @@ public class Room : MonoBehaviour
 		if (wasClearedLastFrame == false && isCleared)
 		{
 			if (spawnLootRiftOnClear)
-				Instantiate(lootRiftPrefab, transform.position, Quaternion.identity);
+			{
+				Instantiate(lootRiftPrefab, transform.position, Quaternion.identity).GetComponent<LootRift>().floor = floor;
+			}
 			if (spawnWinObject)
 				Instantiate(winObject, transform.position, Quaternion.identity);
 		}
