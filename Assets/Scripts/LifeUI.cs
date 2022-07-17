@@ -8,7 +8,7 @@ public class LifeUI : MonoBehaviour
     private PlayerLife player;
     public Image[] lifeImages;
 
-    private void Start()
+    private void Awake()
     {
         player = FindObjectOfType<PlayerLife>();
     }
