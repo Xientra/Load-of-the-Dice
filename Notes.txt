@@ -13,7 +13,6 @@ TODO:
 	game end (win / lose)
 	playltest
 	gun generation
-	retaliation
 
 
 ---

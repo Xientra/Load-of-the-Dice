@@ -12,6 +12,8 @@ public class Room : MonoBehaviour
 
 	public LootRift lootRiftPrefab;
 	public bool spawnLootRiftOnClear = false;
+	public WinObject winObject;
+	public bool spawnWinObject = false;
 
 	[Space(5)]
 
@@ -126,6 +128,8 @@ public class Room : MonoBehaviour
 		{
 			if (spawnLootRiftOnClear)
 				Instantiate(lootRiftPrefab, transform.position, Quaternion.identity);
+			if (spawnWinObject)
+				Instantiate(winObject, transform.position, Quaternion.identity);
 		}
 
 		wasClearedLastFrame = isCleared;

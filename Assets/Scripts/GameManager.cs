@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class GameManager : MonoBehaviour
 
 	public int[] maxCountPerFloor = new int[] { 4, 8, 14 };
 
+	[Header("Game Result Screen:")]
+
+	public GameObject gameResultScreen;
+	public TMP_Text resultLabel;
+	public GameObject continueBtn;
+
 	private void Start()
 	{
 		if (roomParent == null)
@@ -35,7 +42,28 @@ public class GameManager : MonoBehaviour
 
 	private void Player_OnDeath(object sender, System.EventArgs e)
 	{
-		Debug.Log("Player Died could end game here.");
+		gameResultScreen.SetActive(true);
+		resultLabel.text = "Game Over";
+	}
+
+	public void WinGame()
+	{
+		gameResultScreen.SetActive(true);
+		resultLabel.text = "You Win!\nThanks for playing.";
+		continueBtn.SetActive(false);
+	}
+
+
+	public void Btn_Continue()
+	{
+		gameResultScreen.SetActive(false);
+		// enable player
+		player.life = player.maxLife;
+	}
+
+	public void Btn_TryAgain()
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
 	}
 
 	private void SpawnGame()
@@ -73,6 +101,9 @@ public class GameManager : MonoBehaviour
 
 				// set enemy difficulty
 				newRoom.SetAllEnemyDifficulty(maxCountPerFloor[floorI] + roomI, floorI);
+
+				if (floorI == floorCount - 1 && roomI == roomsPerFloor - 1)
+					newRoom.spawnWinObject = true;
 
 				previousRoom = newRoom;
 			}
