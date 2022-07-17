@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8489563090019267594}
   - component: {fileID: 8489563090019267595}
   - component: {fileID: 8407640564171843720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GoldenGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.644, y: 0.050016284, z: -3.8595445}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1074483504445441984}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321c3bb99b388ad4b9fa64e343e90739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rarity: 1
   maxMagazine: 1
   rateOfFire: 180
 --- !u!61 &8407640564171843720
@@ -124,3 +126,81 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!1001 &4608857626991357585
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8489563090019267597}
+    m_Modifications:
+    - target: {fileID: 3538886588137711952, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.7843137
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711952, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711952, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711952, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3538886588137711966, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+      propertyPath: m_Name
+      value: Item Shine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+--- !u!4 &1074483504445441984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3538886588137711953, guid: 512f1237a25e12449bb1988a1e0af4e6, type: 3}
+  m_PrefabInstance: {fileID: 4608857626991357585}
+  m_PrefabAsset: {fileID: 0}

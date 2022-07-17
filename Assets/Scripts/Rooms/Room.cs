@@ -10,6 +10,9 @@ public class Room : MonoBehaviour
 
 	public bool playerInRoom = false;
 
+	public LootRift lootRiftPrefab;
+	public bool spawnLootRiftOnClear = false;
+
 	[Space(5)]
 
 	public Room roomLeft;
@@ -27,6 +30,12 @@ public class Room : MonoBehaviour
 
 	private NextRoomTrigger triggerLeft;
 	private NextRoomTrigger triggerRight;
+
+	[Space(5)]
+
+	public GameObject nextFloorPos;
+	private NextRoomTrigger nextFloorTrigger;
+	public bool nextFloorExit = false;
 
 	[Space(5)]
 
@@ -50,11 +59,28 @@ public class Room : MonoBehaviour
 
 		triggerLeft = leftPos.GetComponentInChildren<NextRoomTrigger>();
 		triggerRight = rightPos.GetComponentInChildren<NextRoomTrigger>();
+		nextFloorTrigger = nextFloorPos.GetComponentInChildren<NextRoomTrigger>();
 
 		triggerLeft.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomLeft.PlayerEnteredRoom(args.gameObject, true); };
 		triggerRight.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomRight.PlayerEnteredRoom(args.gameObject, false); };
+		nextFloorTrigger.OnTriggerEnter += (sender, args) => { PlayLeftRoom(); roomRight.PlayerEnteredRoom(args.gameObject, false); };
 
 		cam = Camera.main.GetComponent<CameraMovement>();
+	}
+
+	public void ActivateNextFloorExit()
+	{
+		nextFloorExit = true;
+
+		rightPos.SetActive(false);
+		nextFloorPos.SetActive(true);
+
+		// just overtake rigth exit logic
+		triggerRight = nextFloorTrigger;
+		rightPos = nextFloorPos;
+		// cannot go back
+		if (roomRight != null)
+			roomRight.roomLeft = null;
 	}
 
 	private void Start()
@@ -75,7 +101,7 @@ public class Room : MonoBehaviour
 
 				// leave collider on if there is no room on that side
 				colliderLeft.enabled = roomLeft == null;
-				colliderRight.enabled = roomRight == null;
+				colliderRight.enabled = roomRight == null || nextFloorExit == true;
 			}
 			else
 			{
@@ -97,7 +123,8 @@ public class Room : MonoBehaviour
 
 		if (wasClearedLastFrame == false && isCleared)
 		{
-			// spawn gatcha here
+			if (spawnLootRiftOnClear)
+				Instantiate(lootRiftPrefab, transform.position, Quaternion.identity);
 		}
 
 		wasClearedLastFrame = isCleared;
@@ -134,6 +161,7 @@ public class Room : MonoBehaviour
 
 		// set enemies active
 		foreach (Enemy enemy in roomEnemies)
-			enemy.gameObject.SetActive(true);
+			if (enemy != null)
+				enemy.gameObject.SetActive(true);
 	}
 }

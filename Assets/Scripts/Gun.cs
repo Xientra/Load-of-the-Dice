@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class Gun : MonoBehaviour
+public class Gun : PickupItem
 {
     private BoxCollider2D bc;
 
@@ -39,12 +39,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
-
-    public void AddDiceToMag(Dice dice)
+	public void AddDiceToMag(Dice dice)
     {
         GameObject UIContainer = GameObject.FindGameObjectWithTag("MagUIContainer");
 
@@ -164,11 +159,15 @@ public class Gun : MonoBehaviour
     public void SetEquiped(bool equipped)
     {
         this.isEquipped = equipped;
+        shineEffect.gameObject.SetActive(!isEquipped);
+
         if (!isEquipped)
         {
             bc.enabled = false;
             StartCoroutine(IFrames());
         }
+        else
+            bc.enabled = false;
     }
 
     IEnumerator IFrames()
