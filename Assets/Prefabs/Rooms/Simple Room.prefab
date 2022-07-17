@@ -3439,7 +3439,7 @@ MonoBehaviour:
   rightPos: {fileID: 5203385184084816261}
   nextFloorPos: {fileID: 3094069354719130989}
   nextFloorExit: 0
-  isCleared: 1
+  isCleared: 0
 --- !u!1 &3014073377185062264
 GameObject:
   m_ObjectHideFlags: 0

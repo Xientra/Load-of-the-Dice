@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
 		player = FindObjectOfType<PlayerLife>();
 		player.OnDeath += Player_OnDeath;
+		player.gameObject.SetActive(false);
+
 
 		SpawnGame();
 	}
@@ -74,5 +76,23 @@ public class GameManager : MonoBehaviour
 				previousRoom = newRoom;
 			}
 		}
+	}
+
+	public void Btn_Play()
+	{
+		// set tutorial on
+
+
+		// set player on
+		player.gameObject.SetActive(true);
+	}
+
+	public void Btn_Exit()
+	{
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#else
+		Application.Quit();
+#endif
 	}
 }
