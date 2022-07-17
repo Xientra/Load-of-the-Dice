@@ -32,6 +32,12 @@ public class PickupItem : MonoBehaviour
 		mm.startColor = rarityColors[rarity];
 	}
 
+    public void SetRarity(int rarity)
+    {
+        this.rarity = rarity;
+        SetColor();
+    }
+
 	protected void OnValidate()
 	{
 		shineEffect = GetComponentInChildren<ParticleSystem>();

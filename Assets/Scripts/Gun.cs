@@ -53,6 +53,16 @@ public class Gun : PickupItem
         }
     }
 
+    public void AddChamber(Chamber chamber)
+    {
+        chambers.Add(chamber);
+    }
+
+    public void ChangeChamber(Chamber chamber, int index)
+    {
+        chambers[index] = chamber;
+    }
+
     public void AddDiceToMag(Dice dice)
     {
         GameObject UIContainer = GameObject.FindGameObjectWithTag("MagUIContainer");
@@ -338,6 +348,27 @@ public class Gun : PickupItem
 
         public void SetAmount(int i) { amount = i; }
         public int GetAmount() { return amount; }
+        public void SetRandom()
+        {
+            int rand = UnityEngine.Random.Range(0, 5);
+            if (rand == 0) Ricochet();
+            if (rand == 1) Pierce();
+            if (rand == 2) Rebound();
+            if (rand == 3) ThreeBurstRow();
+            if (rand == 4) ThreeBurstSpread();
+            rand = UnityEngine.Random.Range(0, 5);
+            if (rand == 0) multiplier = -2;
+            if (rand == 1) multiplier = 2;
+            if (rand == 2) multiplier = -1;
+            if (rand == 3) multiplier = 1;
+
+            if (threeBurstRow)
+            {
+                rand = UnityEngine.Random.Range(0, 2);
+                if (rand == 0) multiplier = -1;
+                if (rand == 1) multiplier = 1;
+            }
+        }
 
         public void SetMultiplier(int i) { multiplier = i; }
         public int GetMultiplier() { return multiplier; }
