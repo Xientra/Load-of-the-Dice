@@ -33,8 +33,8 @@ public class Gun : PickupItem
             if (i == 3) chamber.Ricochet();
             if (i == 4) chamber.Pierce();
             if (i == 5) chamber.Rebound();
-            if (i == 1) chamber.ThreeBurstSpread();
-            if (i == 7) chamber.ThreeBurstRow();
+            if (i == 6) chamber.ThreeBurstSpread();
+            if (i == 1) chamber.ThreeBurstRow();
             chambers.Add(chamber);
         }
     }
@@ -60,8 +60,17 @@ public class Gun : PickupItem
             {
                 Bullet spawnedBullet1 = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
                 Bullet spawnedBullet2 = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
-                spawnedBullet1.transform.Rotate(new Vector3(45, 0, 0));
-                spawnedBullet2.transform.Rotate(new Vector3(-45, 0, 0));
+                spawnedBullet1.transform.up = relativeMousePos;
+                spawnedBullet1.SetEffects(new Chamber());
+                spawnedBullet1.transform.Rotate(new Vector3(0, 0, 20));
+                spawnedBullet2.transform.up = relativeMousePos;
+                spawnedBullet2.SetEffects(new Chamber());
+                spawnedBullet2.transform.Rotate(new Vector3(0, 0, -20));
+            }
+
+            if (chambers[chamberCount].GetThreeBurstRow())
+            {
+                StartCoroutine(ThreeBurst(bullet, relativeMousePos));
             }
 
             Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
@@ -79,6 +88,19 @@ public class Gun : PickupItem
             }
             chamberCount++;
         }
+    }
+
+    IEnumerator ThreeBurst(GameObject bullet, Vector2 relativeMousePos)
+    {
+        yield return new WaitForSeconds(0.1f);
+        Bullet spawnedBullet1 = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
+        spawnedBullet1.transform.up = relativeMousePos;
+        spawnedBullet1.SetEffects(new Chamber());
+
+        yield return new WaitForSeconds(0.1f);
+        Bullet spawnedBullet2 = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
+        spawnedBullet2.transform.up = relativeMousePos;
+        spawnedBullet2.SetEffects(new Chamber());
     }
 
     private void UpdateMagUI()
