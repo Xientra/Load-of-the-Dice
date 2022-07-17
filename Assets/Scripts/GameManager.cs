@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 	public int roomsPerFloor = 5;
 	public int floorCount = 3;
 
-	public int[] maxCountPerFloor = new int[] { 6, 12, 20 };
+	public int[] maxCountPerFloor = new int[] { 4, 8, 14 };
 
 	private void Start()
 	{
@@ -54,9 +54,22 @@ public class GameManager : MonoBehaviour
 
 				if (previousRoom != null)
 					previousRoom.roomRight = newRoom;
+
+				
 				newRoom.roomLeft = previousRoom;
 
-				newRoom.SetAllEnemyDifficulty(maxCountPerFloor[floorI], floorI);
+				// new floor
+				if (roomI == 0)
+					newRoom.roomLeft = null;
+
+				// set different rooms
+				if (roomI == 3 - 1)
+					newRoom.spawnLootRiftOnClear = true;
+				if (roomI == 5 - 1)
+					newRoom.ActivateNextFloorExit();
+
+				// set enemy difficulty
+				newRoom.SetAllEnemyDifficulty(maxCountPerFloor[floorI] + roomI, floorI);
 
 				previousRoom = newRoom;
 			}

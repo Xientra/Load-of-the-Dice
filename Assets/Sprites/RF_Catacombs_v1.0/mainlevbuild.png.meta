@@ -3077,6 +3077,9 @@ TextureImporter:
   - first:
       213: -7380001189340625650
     second: mainlevbuild_down
+  - first:
+      213: -723695024463275362
+    second: mainlevbuild_nextFloor
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -24686,6 +24689,27 @@ TextureImporter:
       bones: []
       spriteID: e05446be408f49990800000000000000
       internalID: -7380001189340625650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuild_nextFloor
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 528
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9a1625a53be4f5f0800000000000000
+      internalID: -723695024463275362
       vertices: []
       indices: 
       edges: []
