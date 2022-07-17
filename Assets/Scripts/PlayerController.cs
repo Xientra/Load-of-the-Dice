@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
     private List<int> damageRolls = new List<int>();
     private List<DiceDataStorage> uiButtons = new List<DiceDataStorage>();
 
+    [Space(5)]
+
+    public GameObject gunPosition;
+
 
     private void Awake()
     {
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.DiceTen.performed += _ => Button(10);
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        currentEquippedGun = currentGun.transform.GetChild(0).GetComponent<Gun>();
+        currentEquippedGun = currentGun.GetComponentInChildren<Gun>();
     }
 
     private void Button(int v)
@@ -114,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        currentEquippedGun.Shoot(bullet, relativeMousePos);        
+        currentEquippedGun.Shoot(bullet, relativeMousePos);
     }
 
     public void OnReload()
@@ -150,14 +154,14 @@ public class PlayerController : MonoBehaviour
         currentGun.transform.right = new Vector3(1, 0, 0);
         currentEquippedGun.SetEquiped(false);
 
-        Transform gun1 = currentGun.transform.GetChild(0);
-        gun1.localScale = new Vector3(1, 1, 1);
+        currentEquippedGun.transform.SetParent(null, true);
+        currentEquippedGun.transform.position = gun.transform.position;
 
-        currentGun.transform.DetachChildren();
-        gun1.position = gun.transform.position;
+        gun.transform.parent = gunPosition.transform;
+        gun.transform.localPosition = Vector3.zero;
+        gun.transform.localScale = Vector3.one;
+        gun.transform.localRotation = Quaternion.identity;
 
-        gun.transform.parent = currentGun.transform;
-        gun.transform.localPosition = new Vector3(1f, 0.05001628f, 0f);
         currentEquippedGun = gun.GetComponent<Gun>();
         currentEquippedGun.SetEquiped(true);
 

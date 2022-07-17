@@ -19,6 +19,10 @@ public class Gun : PickupItem
     private bool isEquipped = false;
     private int addCounter = 0;
 
+    public GameObject muzzlePosition;
+
+    public GameObject muzzleEffectPrefab;
+
     void Start()
     {
         bc = GetComponent<BoxCollider2D>();
@@ -42,7 +46,10 @@ public class Gun : PickupItem
         {
             UpdateMagUI();
 
-            Bullet spawnedBullet = Instantiate(bullet, transform.position, Quaternion.identity).GetComponent<Bullet>();
+            // effects
+            Instantiate(muzzleEffectPrefab, muzzlePosition.transform.position, Quaternion.identity).transform.right = transform.right;
+
+            Bullet spawnedBullet = Instantiate(bullet, muzzlePosition.transform.position, Quaternion.identity).GetComponent<Bullet>();
             spawnedBullet.transform.up = relativeMousePos;
             spawnedBullet.SetDamage(damageRolls[0]);
             damageRolls.RemoveAt(0);
