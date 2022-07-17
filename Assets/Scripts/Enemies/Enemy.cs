@@ -170,7 +170,6 @@ public class Enemy : MonoBehaviour
 			//if (hit.collider.CompareTag("Player"))
 			{
 				Shoot();
-				shootTimestamp = Time.time + Random.Range(shootIntervallMinMax.x, shootIntervallMinMax.y);
 			}
 		}
 	}
@@ -181,6 +180,8 @@ public class Enemy : MonoBehaviour
 
 		if (allNumbers.Contains(number))
 			numberHits = true;
+		else
+			Retailate();
 
 		if (numberHits)
 			Die();
@@ -193,9 +194,35 @@ public class Enemy : MonoBehaviour
 		Destroy(this.gameObject);
 	}
 
-	private void Shoot()
+	private void Shoot(float rotation = 0)
 	{
-		Instantiate(bulletPrefab, crosshair.transform.position, Quaternion.identity).transform.right = player.transform.position - transform.position;
+		GameObject bullet = Instantiate(bulletPrefab, crosshair.transform.position, Quaternion.identity);
+		bullet.transform.right = player.transform.position - transform.position;
+		bullet.transform.Rotate(0, 0, rotation);
+		shootTimestamp = Time.time + Random.Range(shootIntervallMinMax.x, shootIntervallMinMax.y);
+	}
+
+	private void Retailate()
+	{
+		StartCoroutine(Retaliation());
+	}
+
+	private IEnumerator Retaliation()
+	{
+		float delay = 0.4f;
+
+		Shoot();
+		Shoot(30);
+		Shoot(-30);
+		yield return new WaitForSeconds(delay);
+		Shoot();
+		Shoot(30);
+		Shoot(-30);
+		yield return new WaitForSeconds(delay);
+		Shoot();
+		Shoot(30);
+		Shoot(-30);
+		yield return new WaitForSeconds(delay);
 	}
 
 	[System.Serializable]
