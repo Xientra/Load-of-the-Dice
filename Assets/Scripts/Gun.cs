@@ -299,6 +299,9 @@ public class Gun : PickupItem
         {
             bc.enabled = false;
             StartCoroutine(IFrames());
+            selectedDice.Clear();
+            damageRolls.Clear();
+            loaded = false;
         }
         else
         {

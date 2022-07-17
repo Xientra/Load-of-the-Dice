@@ -51,7 +51,12 @@ public class LootRift : MonoBehaviour
             CollectableDice newDice = Instantiate(dicePrefab.gameObject, transform.position, Quaternion.identity).GetComponent<CollectableDice>();
 
             // generate dice cooler
-            newDice.SetValue(Random.Range(1, 20 + 1));
+            if (floor == 0)
+                newDice.SetValue(Random.Range(1, 10 + 1));
+            else if (floor == 1)
+                newDice.SetValue(Random.Range(5, 15 + 1));
+            else
+                newDice.SetValue(Random.Range(10, 20 + 1));
 
             StartCoroutine(AnimateItem(newDice.gameObject));
         }
